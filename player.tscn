@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://cww2ddmp7280v"]
+
+[ext_resource type="Script" path="res://PlayerMovement.cs" id="1_6c2iq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p7of3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7rf16"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qti8m"]
+
+[node name="Player" type="RigidBody3D"]
+continuous_cd = true
+lock_rotation = true
+script = ExtResource("1_6c2iq")
+
+[node name="MovementCollider" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_p7of3")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+
+[node name="ViewPort" type="Camera3D" parent="Head"]
+fov = 90.0
+
+[node name="Area3D" type="Area3D" parent="Head"]
+
+[node name="HeadCheck" type="CollisionShape3D" parent="Head/Area3D"]
+shape = SubResource("SphereShape3D_7rf16")
+
+[node name="Feet" type="Area3D" parent="."]
+
+[node name="FeetCheck" type="CollisionShape3D" parent="Feet"]
+shape = SubResource("SphereShape3D_qti8m")
