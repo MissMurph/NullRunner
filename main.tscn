@@ -1,26 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddno3pm7ofufo"]
+[gd_scene load_steps=7 format=3 uid="uid://ddno3pm7ofufo"]
 
 [ext_resource type="PackedScene" uid="uid://cww2ddmp7280v" path="res://player.tscn" id="1_utdh0"]
+[ext_resource type="Texture2D" uid="uid://jnoagalq5yiw" path="res://Textures/Checker.png" id="2_f4jiy"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4mwxq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5818b"]
-size = Vector3(60, 2, 60)
+size = Vector3(120, 2, 120)
 
 [sub_resource type="BoxMesh" id="BoxMesh_12bww"]
-size = Vector3(60, 2, 60)
+size = Vector3(120, 2, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1apxq"]
+albedo_texture = ExtResource("2_f4jiy")
+uv1_triplanar = true
 
 [node name="Main" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_utdh0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+collision_layer = 3
+acceleration = 2.0
+maxSpeed = 6.0
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+physics_material_override = SubResource("PhysicsMaterial_4mwxq")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
 shape = SubResource("BoxShape3D_5818b")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+layers = 2
 mesh = SubResource("BoxMesh_12bww")
+surface_material_override/0 = SubResource("StandardMaterial3D_1apxq")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 26, 0)

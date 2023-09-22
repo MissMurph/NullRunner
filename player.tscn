@@ -1,17 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://cww2ddmp7280v"]
+[gd_scene load_steps=7 format=3 uid="uid://cww2ddmp7280v"]
 
 [ext_resource type="Script" path="res://PlayerMovement.cs" id="1_6c2iq"]
+[ext_resource type="Script" path="res://PlayerLooking.cs" id="2_cf3ec"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ufu2q"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p7of3"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_7rf16"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e1e7a"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qti8m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_futqo"]
 
 [node name="Player" type="RigidBody3D"]
+physics_material_override = SubResource("PhysicsMaterial_ufu2q")
 continuous_cd = true
 lock_rotation = true
+linear_damp = 1.0
 script = ExtResource("1_6c2iq")
+acceleration = 6.0
+speed = 5.0
+maxSpeed = 10.0
+airModifier = 0.2
+stopSpeed = 0.2
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -19,16 +29,22 @@ shape = SubResource("CapsuleShape3D_p7of3")
 
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+script = ExtResource("2_cf3ec")
+sensitivity = 2.0
 
 [node name="ViewPort" type="Camera3D" parent="Head"]
+current = true
 fov = 90.0
 
-[node name="Area3D" type="Area3D" parent="Head"]
+[node name="HeadCheck" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 1, 0)
 
-[node name="HeadCheck" type="CollisionShape3D" parent="Head/Area3D"]
-shape = SubResource("SphereShape3D_7rf16")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transparency = 0.25
+mesh = SubResource("CapsuleMesh_e1e7a")
+surface_material_override/0 = SubResource("ShaderMaterial_futqo")
 
-[node name="Feet" type="Area3D" parent="."]
-
-[node name="FeetCheck" type="CollisionShape3D" parent="Feet"]
-shape = SubResource("SphereShape3D_qti8m")
+[node name="Feet" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+target_position = Vector3(0, -0.3, 0)
