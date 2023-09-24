@@ -1,9 +1,10 @@
 [gd_scene load_steps=7 format=3 uid="uid://ddno3pm7ofufo"]
 
-[ext_resource type="PackedScene" uid="uid://cww2ddmp7280v" path="res://player.tscn" id="1_utdh0"]
+[ext_resource type="PackedScene" uid="uid://cww2ddmp7280v" path="res://Scenes/Player/player.tscn" id="1_utdh0"]
 [ext_resource type="Texture2D" uid="uid://jnoagalq5yiw" path="res://Textures/Checker.png" id="2_f4jiy"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4mwxq"]
+friction = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5818b"]
 size = Vector3(120, 2, 120)
@@ -20,8 +21,12 @@ uv1_triplanar = true
 [node name="Player" parent="." instance=ExtResource("1_utdh0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 collision_layer = 3
-acceleration = 2.0
-maxSpeed = 6.0
+acceleration = 20.0
+speed = 35.0
+maxSpeed = 40.0
+airModifier = 0.25
+jumpForce = 10.0
+baseDrag = 0.1
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

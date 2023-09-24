@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://tb62t765yixo"
-path="res://.godot/imported/Character.blend-a49c940f263735ca7790d86b7c5c9c88.scn"
+uid="uid://c2h5u6vk5xk5k"
+path="res://.godot/imported/PlayerArms.blend-795ac03c0e1f46bb76ca26ef51e80b7a.scn"
 
 [deps]
 
-source_file="res://Models/Character.blend"
-dest_files=["res://.godot/imported/Character.blend-a49c940f263735ca7790d86b7c5c9c88.scn"]
+source_file="res://Models/Player/PlayerArms.blend"
+dest_files=["res://.godot/imported/PlayerArms.blend-795ac03c0e1f46bb76ca26ef51e80b7a.scn"]
 
 [params]
 

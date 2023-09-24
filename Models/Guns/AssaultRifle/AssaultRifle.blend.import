@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://tb62t765yixo"
-path="res://.godot/imported/Character.blend-a49c940f263735ca7790d86b7c5c9c88.scn"
+uid="uid://dhh57m5bh0lk0"
+path="res://.godot/imported/AssaultRifle.blend-ccc67369771ed45dc877adf5162bc5d8.scn"
 
 [deps]
 
-source_file="res://Models/Character.blend"
-dest_files=["res://.godot/imported/Character.blend-a49c940f263735ca7790d86b7c5c9c88.scn"]
+source_file="res://Models/Guns/AssaultRifle/AssaultRifle.blend"
+dest_files=["res://.godot/imported/AssaultRifle.blend-ccc67369771ed45dc877adf5162bc5d8.scn"]
 
 [params]
 
@@ -24,7 +24,7 @@ meshes/light_baking=1
 meshes/lightmap_texel_size=0.2
 skins/use_named_skins=true
 animation/import=true
-animation/fps=24.0
+animation/fps=30
 animation/trimming=false
 animation/remove_immutable_tracks=true
 import_script/path=""

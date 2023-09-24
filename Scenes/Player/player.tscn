@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cww2ddmp7280v"]
+[gd_scene load_steps=9 format=3 uid="uid://cww2ddmp7280v"]
 
 [ext_resource type="Script" path="res://PlayerMovement.cs" id="1_6c2iq"]
 [ext_resource type="Script" path="res://PlayerLooking.cs" id="2_cf3ec"]
+[ext_resource type="PackedScene" uid="uid://dm7alvryga7pe" path="res://Scenes/Player/player_arms.tscn" id="3_56im5"]
+[ext_resource type="PackedScene" uid="uid://bhq6mcj16c3ea" path="res://Scenes/Weapons/assault_rifle.tscn" id="4_ac55q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ufu2q"]
+friction = 0.1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p7of3"]
 
@@ -17,11 +20,10 @@ continuous_cd = true
 lock_rotation = true
 linear_damp = 1.0
 script = ExtResource("1_6c2iq")
-acceleration = 6.0
-speed = 5.0
-maxSpeed = 10.0
-airModifier = 0.2
+speed = 15.0
+maxSpeed = 30.0
 stopSpeed = 0.2
+drag = false
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -30,16 +32,23 @@ shape = SubResource("CapsuleShape3D_p7of3")
 [node name="Head" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 script = ExtResource("2_cf3ec")
-sensitivity = 2.0
+sensitivity = 4.0
 
 [node name="ViewPort" type="Camera3D" parent="Head"]
 current = true
 fov = 90.0
 
+[node name="PlayerArms" parent="Head/ViewPort" node_paths=PackedStringArray("activeWeapon") instance=ExtResource("3_56im5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+activeWeapon = NodePath("AssaultRifle")
+
+[node name="AssaultRifle" parent="Head/ViewPort/PlayerArms" instance=ExtResource("4_ac55q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41, 0.23, -0.535)
+
 [node name="HeadCheck" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 1, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Avatar" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transparency = 0.25
 mesh = SubResource("CapsuleMesh_e1e7a")

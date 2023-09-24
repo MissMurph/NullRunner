@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhq6mcj16c3ea"]
+
+[ext_resource type="PackedScene" uid="uid://dhh57m5bh0lk0" path="res://Models/Guns/AssaultRifle/AssaultRifle.blend" id="1_8y46q"]
+[ext_resource type="Script" path="res://Weapon.cs" id="2_8yprt"]
+[ext_resource type="PackedScene" uid="uid://dvw8430xyiuqi" path="res://bullet.tscn" id="3_vc6tv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6jvv"]
+albedo_color = Color(0.431373, 0.431373, 0.431373, 1)
+metallic = 1.0
+metallic_specular = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ax31"]
+albedo_color = Color(0.486275, 0.486275, 0.486275, 1)
+metallic = 0.55
+
+[sub_resource type="Animation" id="Animation_0y72j"]
+resource_name = "recoil"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GunRig:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0.1), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_87os2"]
+_data = {
+"recoil": SubResource("Animation_0y72j")
+}
+
+[node name="AssaultRifle" node_paths=PackedStringArray("forwardGrip", "backwardGrip", "animator", "muzzle") instance=ExtResource("1_8y46q")]
+script = ExtResource("2_8yprt")
+forwardGrip = NodePath("GunRig/Skeleton3D/Gun/ForwardGrip")
+backwardGrip = NodePath("GunRig/Skeleton3D/Gun/BackGrip")
+animator = NodePath("AnimationPlayer")
+muzzle = NodePath("Muzzle")
+bulletResource = ExtResource("3_vc6tv")
+
+[node name="GunRig" parent="." index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Gun" parent="GunRig/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_i6jvv")
+
+[node name="ForwardGrip" type="Node3D" parent="GunRig/Skeleton3D/Gun" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.534034)
+
+[node name="BackGrip" type="Node3D" parent="GunRig/Skeleton3D/Gun" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.623433, 1.8796)
+
+[node name="Magazine" parent="GunRig/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_1ax31")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="1"]
+libraries = {
+"": SubResource("AnimationLibrary_87os2")
+}
+
+[node name="Muzzle" type="RayCast3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.402074)
+target_position = Vector3(0, 0, -1)

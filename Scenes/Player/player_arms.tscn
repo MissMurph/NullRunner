@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm7alvryga7pe"]
+
+[ext_resource type="PackedScene" uid="uid://c2h5u6vk5xk5k" path="res://Models/Player/PlayerArms.blend" id="1_us20b"]
+[ext_resource type="Script" path="res://Scenes/Player/ArmController.cs" id="2_ggjrm"]
+
+[node name="PlayerArms" node_paths=PackedStringArray("leftHandTarget", "rightHandTarget", "leftIK", "rightIK") instance=ExtResource("1_us20b")]
+script = ExtResource("2_ggjrm")
+leftHandTarget = NodePath("LeftHandTarget")
+rightHandTarget = NodePath("RightHandTarget")
+leftIK = NodePath("Armature/Skeleton3D/LeftArmIK")
+rightIK = NodePath("Armature/Skeleton3D/RightArmIK")
+
+[node name="Armature" parent="." index="0"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(-0.290873, -0.178885, -0.935275, 0.0930211)
+bones/2/rotation = Quaternion(-0.376698, 5.51117e-08, 5.92782e-09, 0.926336)
+bones/3/rotation = Quaternion(0.0332577, 0.296703, 0.0723007, 0.951648)
+bones/8/position = Vector3(1.30621, -1.59182, 0.0438448)
+bones/8/rotation = Quaternion(-4.50494e-08, -0.643838, -0.765162, -5.16454e-08)
+bones/10/rotation = Quaternion(-0.212572, 0.177509, 0.954909, 0.107014)
+bones/11/rotation = Quaternion(-0.360103, 8.36781e-09, 2.76958e-08, 0.932912)
+bones/12/rotation = Quaternion(0.0216305, -0.237497, -0.0152941, 0.971027)
+bones/17/position = Vector3(-1.45102, -1.59182, 0.0438448)
+bones/17/rotation = Quaternion(-4.50494e-08, 0.643838, 0.765162, -5.16454e-08)
+bones/18/position = Vector3(-2.63361, -2.20419, 2.22799)
+
+[node name="LeftArmIK" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
+root_bone = &"Bicep L"
+tip_bone = &"Hand L"
+use_magnet = true
+magnet = Vector3(-2, -1, 0)
+target_node = NodePath("../../../LeftHandTarget")
+
+[node name="RightArmIK" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="7"]
+root_bone = &"Bicep R"
+tip_bone = &"Hand R"
+use_magnet = true
+magnet = Vector3(2, -1, 0)
+target_node = NodePath("../../../RightHandTarget")
+
+[node name="LeftHandTarget" type="Node3D" parent="." index="2"]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, -0.297463, 0, -0.531107)
+
+[node name="RightHandTarget" type="Node3D" parent="." index="3"]
+transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08, -1, 0, -1, -4.37114e-08, 0.259838, 0, -0.507822)
