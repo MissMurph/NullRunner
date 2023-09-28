@@ -18,10 +18,16 @@ public partial class ArmController : Node3D {
 	[Export]
 	private SkeletonIK3D rightIK;
 
+	[Export]
+	private BoneAttachment3D grappleSource;
+
 	private AnimationPlayer animator;
+
+	private AnimationTree animTree;
 
 	public override void _Ready () {
 		animator = GetNode<AnimationPlayer>("AnimationPlayer");
+		animTree = GetNode<AnimationTree>("AnimationTree");
 
 		if (activeWeapon is not null) {
 			GD.Print("yeet");
@@ -39,6 +45,24 @@ public partial class ArmController : Node3D {
 	}
 
 	public override void _Input (InputEvent @event) {
-		
+		if (@event.IsAction("grapple")) {
+			if (@event.IsPressed()) {
+				GD.Print("Grapple Pressed");
+				leftIK.Stop();
+				animTree.Set("parameters/conditions/grappleEnd", false);
+				animTree.Set("parameters/conditions/fireGrapple", true);
+			}
+
+			if (@event.IsReleased()) {
+				GD.Print("Grapple Released");
+				animTree.Set("parameters/conditions/grappleEnd", true);
+				animTree.Set("parameters/conditions/fireGrapple", false);
+				leftIK.Start();
+			}
+		}
+	}
+
+	public void FireGrapple () {
+
 	}
 }

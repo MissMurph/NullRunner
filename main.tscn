@@ -25,8 +25,7 @@ acceleration = 20.0
 speed = 35.0
 maxSpeed = 40.0
 airModifier = 0.25
-jumpForce = 10.0
-baseDrag = 0.1
+drag = false
 
 [node name="Ground" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
