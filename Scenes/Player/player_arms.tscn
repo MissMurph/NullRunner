@@ -64,11 +64,11 @@ grappleSource = NodePath("Armature/Skeleton3D/GrappleAttachment")
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/1/rotation = Quaternion(-0.290873, -0.178885, -0.935275, 0.0930212)
-bones/2/rotation = Quaternion(-0.376697, 5.51117e-08, 5.92782e-09, 0.926336)
+bones/1/rotation = Quaternion(-0.290873, -0.178885, -0.935275, 0.0930211)
+bones/2/rotation = Quaternion(-0.376698, 5.51117e-08, 5.92782e-09, 0.926336)
 bones/3/rotation = Quaternion(0.0332577, 0.296703, 0.0723007, 0.951648)
 bones/8/position = Vector3(1.30621, -1.59182, 0.0438448)
-bones/8/rotation = Quaternion(-5.96046e-08, -0.643838, -0.765162, -6.33299e-08)
+bones/8/rotation = Quaternion(-4.50494e-08, -0.643838, -0.765162, -5.16454e-08)
 bones/10/rotation = Quaternion(-0.382073, -0.388548, 0.494599, 0.677069)
 bones/11/rotation = Quaternion(-0.304257, 1.19118e-08, 2.47316e-08, 0.95259)
 bones/12/rotation = Quaternion(0.00837991, -0.315165, -0.0522687, 0.947559)
@@ -94,9 +94,9 @@ magnet = Vector3(2, -1, 0)
 target_node = NodePath("../../../RightHandTarget")
 
 [node name="GrappleAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(0.208804, 0.220254, -0.952832, 0.966663, 0.101164, 0.23522, 0.148201, -0.970182, -0.191788, -1.64797, 1.34955, -1.44068)
-bone_name = "Forearm L"
-bone_idx = 11
+transform = Transform3D(-0.425067, 0.192076, -0.884548, 0.899076, 0.20273, -0.388026, 0.104794, -0.960212, -0.258864, -1.38155, 1.47192, -2.61422)
+bone_name = "Hand L"
+bone_idx = 12
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

@@ -28,11 +28,12 @@ public partial class Weapon : Node3D {
 			if (!animator.IsPlaying()) {
 				animator.Play("recoil");
 				Node3D bullet = bulletResource.Instantiate() as Node3D;
-				bullet.GlobalPosition = muzzle.GlobalPosition;
-				bullet.Basis = muzzle.Transform.Basis;
+				bullet.Position = muzzle.GlobalPosition;
+				bullet.Basis = muzzle.GlobalTransform.Basis;
 				//GD.Print(bullet);
-				Owner.AddChild(bullet);
+				//Owner.AddChild(bullet);
 				//RemoveChild(bullet);
+				this.GetTree().Root.AddChild(bullet);
 			}
 		}
 	}

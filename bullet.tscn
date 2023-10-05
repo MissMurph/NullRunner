@@ -13,10 +13,13 @@ emission_energy_multiplier = 5.0
 
 [node name="Bullet" type="Node3D"]
 script = ExtResource("1_qjipe")
+speed = 120.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_f4kui")
 surface_material_override/0 = SubResource("StandardMaterial3D_2crx0")
 
-[node name="RayCast3D" type="RayCast3D" parent="MeshInstance3D"]
-target_position = Vector3(0, 0, -0.25)
+[node name="Ray" type="RayCast3D" parent="Mesh"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 2
+hit_from_inside = true

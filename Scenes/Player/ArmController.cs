@@ -63,6 +63,6 @@ public partial class ArmController : Node3D {
 	}
 
 	public void FireGrapple () {
-
+		//Mesh.PrimitiveType.LineStrip
 	}
 }

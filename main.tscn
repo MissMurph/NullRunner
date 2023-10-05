@@ -1,7 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddno3pm7ofufo"]
+[gd_scene load_steps=11 format=3 uid="uid://ddno3pm7ofufo"]
 
+[ext_resource type="Script" path="res://WorldManager.cs" id="1_cpo7n"]
 [ext_resource type="PackedScene" uid="uid://cww2ddmp7280v" path="res://Scenes/Player/player.tscn" id="1_utdh0"]
 [ext_resource type="Texture2D" uid="uid://jnoagalq5yiw" path="res://Textures/Checker.png" id="2_f4jiy"]
+[ext_resource type="Material" uid="uid://dj3s8bcvk3rts" path="res://Materials/Triplanar.tres" id="4_odf2d"]
+[ext_resource type="PackedScene" uid="uid://bwaucltatsd8p" path="res://Scenes/Entities/enemy.tscn" id="5_1fw2g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4mwxq"]
 friction = 0.0
@@ -16,7 +19,11 @@ size = Vector3(120, 2, 120)
 albedo_texture = ExtResource("2_f4jiy")
 uv1_triplanar = true
 
+[sub_resource type="BoxMesh" id="BoxMesh_ngk6d"]
+size = Vector3(120, 50, 1)
+
 [node name="Main" type="Node"]
+script = ExtResource("1_cpo7n")
 
 [node name="Player" parent="." instance=ExtResource("1_utdh0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
@@ -43,3 +50,26 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1apxq")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 26, 0)
 light_color = Color(0.764706, 1, 1, 1)
 shadow_enabled = true
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 60)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, -60)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 25, -2.62268e-06)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60, 25, 2.62268e-06)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="Enemy" parent="." instance=ExtResource("5_1fw2g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15232, 0, -14.6846)
