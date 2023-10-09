@@ -33,7 +33,7 @@ public partial class Weapon : Node3D {
 				//GD.Print(bullet);
 				//Owner.AddChild(bullet);
 				//RemoveChild(bullet);
-				this.GetTree().Root.AddChild(bullet);
+				GetTree().Root.AddChild(bullet);
 			}
 		}
 	}

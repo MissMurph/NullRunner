@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://2gyi3ao4vpym"]
+
+[ext_resource type="Script" path="res://GrappleHook.cs" id="1_m7rvc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0xa1b"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xio4"]
+albedo_color = Color(0.333333, 0.333333, 0.333333, 1)
+
+[node name="GrappleHook" type="Node3D"]
+script = ExtResource("1_m7rvc")
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_0xa1b")
+surface_material_override/0 = SubResource("StandardMaterial3D_4xio4")
+
+[node name="Ray" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -1)

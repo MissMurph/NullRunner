@@ -19,7 +19,13 @@ public partial class Bullet : Node3D {
 			) {
 			//bodyPart.Connect
 
-			GD.Print(collider.GetCollider().GetSignalList());
+			//GD.Print(collider.GetCollider().GetSignalList());
+
+			//collider.GetCollider().Call("LimbTest");
+
+			if (collider.GetCollider() is Limb bodyPart) {
+				bodyPart.AttackLimb(GlobalRotation);
+			}
 		}
 	}
 }

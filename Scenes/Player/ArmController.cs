@@ -25,6 +25,15 @@ public partial class ArmController : Node3D {
 
 	private AnimationTree animTree;
 
+	[Export]
+	private PackedScene grappleResource;
+
+	[Signal]
+	public delegate void GrappleHitEventHandler ();
+
+	[Signal]
+	public delegate void GrappleReleaseEventHandler ();
+
 	public override void _Ready () {
 		animator = GetNode<AnimationPlayer>("AnimationPlayer");
 		animTree = GetNode<AnimationTree>("AnimationTree");
@@ -63,6 +72,18 @@ public partial class ArmController : Node3D {
 	}
 
 	public void FireGrapple () {
-		//Mesh.PrimitiveType.LineStrip
+		Node3D hookProjectile = grappleResource.Instantiate() as Node3D;
+
+		hookProjectile.Position = grappleSource.GlobalPosition;
+		hookProjectile.Basis = GlobalTransform.Basis;
+		//GrappleHook yeet = hookProjectile.GetScript<GrappleHook>();
+
+		hookProjectile.Connect("GrappleHit", Callable.From(OnGrappleHit));
+
+		GetTree().Root.AddChild(hookProjectile);
+	}
+
+	private void OnGrappleHit () {
+		GD.Print("Grapple Hit Something");
 	}
 }

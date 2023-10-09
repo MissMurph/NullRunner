@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dm7alvryga7pe"]
+[gd_scene load_steps=17 format=3 uid="uid://dm7alvryga7pe"]
 
 [ext_resource type="PackedScene" uid="uid://c2h5u6vk5xk5k" path="res://Models/Player/PlayerArms.blend" id="1_us20b"]
 [ext_resource type="Script" path="res://Scenes/Player/ArmController.cs" id="2_ggjrm"]
+[ext_resource type="PackedScene" uid="uid://2gyi3ao4vpym" path="res://Scenes/Player/grapple_hook.tscn" id="3_la73d"]
 [ext_resource type="Animation" uid="uid://dg7xuqx6k6gs2" path="res://Animations/Player/ArmsDown.res" id="3_swqyp"]
 [ext_resource type="Animation" uid="uid://b5hwdhsx5xiok" path="res://Animations/Player/FireGrapple.res" id="4_lbo7c"]
 [ext_resource type="Animation" uid="uid://c28l7fki8asw7" path="res://Animations/Player/PullGrapple.res" id="5_cb4pf"]
@@ -50,7 +51,7 @@ states/FireGrapple/position = Vector2(562, 32)
 states/PullGrapple/node = SubResource("AnimationNodeAnimation_cnl21")
 states/PullGrapple/position = Vector2(376, -16)
 transitions = ["Start", "Default", SubResource("AnimationNodeStateMachineTransition_njs05"), "Default", "FireGrapple", SubResource("AnimationNodeStateMachineTransition_umbub"), "FireGrapple", "PullGrapple", SubResource("AnimationNodeStateMachineTransition_awfk8"), "PullGrapple", "Default", SubResource("AnimationNodeStateMachineTransition_6c77e"), "FireGrapple", "Default", SubResource("AnimationNodeStateMachineTransition_m2klx")]
-graph_offset = Vector2(75, -73)
+graph_offset = Vector2(-12, -56)
 
 [node name="PlayerArms" node_paths=PackedStringArray("leftHandTarget", "rightHandTarget", "leftIK", "rightIK", "grappleSource") instance=ExtResource("1_us20b")]
 script = ExtResource("2_ggjrm")
@@ -59,25 +60,23 @@ rightHandTarget = NodePath("RightHandTarget")
 leftIK = NodePath("Armature/Skeleton3D/LeftArmIK")
 rightIK = NodePath("Armature/Skeleton3D/RightArmIK")
 grappleSource = NodePath("Armature/Skeleton3D/GrappleAttachment")
+grappleResource = ExtResource("3_la73d")
 
 [node name="Armature" parent="." index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Armature" index="0"]
-bones/1/rotation = Quaternion(-0.290873, -0.178885, -0.935275, 0.0930211)
-bones/2/rotation = Quaternion(-0.376698, 5.51117e-08, 5.92782e-09, 0.926336)
+bones/1/rotation = Quaternion(-0.290873, -0.178885, -0.935275, 0.0930212)
+bones/2/rotation = Quaternion(-0.376697, 5.51117e-08, 5.92782e-09, 0.926336)
 bones/3/rotation = Quaternion(0.0332577, 0.296703, 0.0723007, 0.951648)
 bones/8/position = Vector3(1.30621, -1.59182, 0.0438448)
-bones/8/rotation = Quaternion(-4.50494e-08, -0.643838, -0.765162, -5.16454e-08)
-bones/10/rotation = Quaternion(-0.382073, -0.388548, 0.494599, 0.677069)
-bones/11/rotation = Quaternion(-0.304257, 1.19118e-08, 2.47316e-08, 0.95259)
-bones/12/rotation = Quaternion(0.00837991, -0.315165, -0.0522687, 0.947559)
-bones/13/rotation = Quaternion(2.42144e-08, -5.12227e-09, -1.86265e-09, 1)
-bones/14/rotation = Quaternion(-4.65661e-08, -7.91624e-09, -5.58793e-09, 1)
-bones/15/rotation = Quaternion(-0.297881, -4.55231e-09, 4.68522e-09, 0.954603)
-bones/16/rotation = Quaternion(0.185351, -4.05092e-08, -4.36984e-09, 0.982672)
-bones/17/position = Vector3(-1.38155, 1.47191, -2.61422)
-bones/17/rotation = Quaternion(0.0147545, -0.0746163, 0.840813, 0.535956)
+bones/8/rotation = Quaternion(-5.96046e-08, -0.643838, -0.765162, -6.33299e-08)
+bones/10/rotation = Quaternion(-0.212572, 0.177509, 0.954909, 0.107014)
+bones/11/rotation = Quaternion(-0.360103, 8.36781e-09, 2.76958e-08, 0.932912)
+bones/12/rotation = Quaternion(0.0216305, -0.237497, -0.0152941, 0.971027)
+bones/17/position = Vector3(-1.45102, -1.59182, 0.0438448)
+bones/17/rotation = Quaternion(-5.96046e-08, 0.643838, 0.765162, -6.33299e-08)
+bones/18/position = Vector3(-2.63361, -2.20419, 2.22799)
 
 [node name="LeftArmIK" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="6"]
 root_bone = &"Bicep L"
@@ -94,7 +93,7 @@ magnet = Vector3(2, -1, 0)
 target_node = NodePath("../../../RightHandTarget")
 
 [node name="GrappleAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(-0.425067, 0.192076, -0.884548, 0.899076, 0.20273, -0.388026, 0.104794, -0.960212, -0.258864, -1.38155, 1.47192, -2.61422)
+transform = Transform3D(-1, -2.04891e-08, -6.25849e-07, 1.49012e-07, -0.94777, -0.318955, -5.36442e-07, -0.318955, 0.94777, -1.45102, -1.59182, 0.0438469)
 bone_name = "Hand L"
 bone_idx = 12
 
@@ -112,6 +111,7 @@ transform = Transform3D(-1, -3.82137e-15, 8.74228e-08, -8.74228e-08, 4.37114e-08
 [node name="AnimationTree" type="AnimationTree" parent="." index="4"]
 tree_root = SubResource("AnimationNodeStateMachine_tt170")
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/conditions/fireGrapple = false
 parameters/conditions/grappleEnd = false
 parameters/conditions/grappleHit = false

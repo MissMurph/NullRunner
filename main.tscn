@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ddno3pm7ofufo"]
+[gd_scene load_steps=12 format=3 uid="uid://ddno3pm7ofufo"]
 
 [ext_resource type="Script" path="res://WorldManager.cs" id="1_cpo7n"]
 [ext_resource type="PackedScene" uid="uid://cww2ddmp7280v" path="res://Scenes/Player/player.tscn" id="1_utdh0"]
@@ -20,6 +20,9 @@ albedo_texture = ExtResource("2_f4jiy")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_ngk6d"]
+size = Vector3(120, 50, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ielh8"]
 size = Vector3(120, 50, 1)
 
 [node name="Main" type="Node"]
@@ -46,30 +49,46 @@ layers = 2
 mesh = SubResource("BoxMesh_12bww")
 surface_material_override/0 = SubResource("StandardMaterial3D_1apxq")
 
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, 60)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, -60)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CSGMesh3D3" type="CSGMesh3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 26, -2.62268e-06)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CSGMesh3D4" type="CSGMesh3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60, 26, 2.62268e-06)
+mesh = SubResource("BoxMesh_ngk6d")
+material = ExtResource("4_odf2d")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, 60)
+shape = SubResource("BoxShape3D_ielh8")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 26, -60)
+shape = SubResource("BoxShape3D_ielh8")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 26, -2.62268e-06)
+shape = SubResource("BoxShape3D_ielh8")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60, 26, 2.62268e-06)
+shape = SubResource("BoxShape3D_ielh8")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 26, 0)
 light_color = Color(0.764706, 1, 1, 1)
 shadow_enabled = true
-
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 60)
-mesh = SubResource("BoxMesh_ngk6d")
-material = ExtResource("4_odf2d")
-
-[node name="CSGMesh3D2" type="CSGMesh3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, -60)
-mesh = SubResource("BoxMesh_ngk6d")
-material = ExtResource("4_odf2d")
-
-[node name="CSGMesh3D3" type="CSGMesh3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -60, 25, -2.62268e-06)
-mesh = SubResource("BoxMesh_ngk6d")
-material = ExtResource("4_odf2d")
-
-[node name="CSGMesh3D4" type="CSGMesh3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60, 25, 2.62268e-06)
-mesh = SubResource("BoxMesh_ngk6d")
-material = ExtResource("4_odf2d")
 
 [node name="Enemy" parent="." instance=ExtResource("5_1fw2g")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.15232, 0, -14.6846)

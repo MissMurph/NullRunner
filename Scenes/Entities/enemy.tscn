@@ -5,6 +5,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h58w6"]
 
 [node name="Enemy" type="CharacterBody3D"]
+collision_layer = 0
 
 [node name="Character" parent="." instance=ExtResource("1_hpfvj")]
 
