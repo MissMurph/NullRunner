@@ -11,11 +11,11 @@ public partial class Body : Node3D {
 	//private Queue<Limb>
 
 	public override void _Ready() {
-		rig = GetNode<Skeleton3D>("Armature/Skeleton3D");
+		rig = GetNode<Skeleton3D>("Armature/GeneralSkeleton");
 
-		foreach (Node limbNode in GetNode("Armature/Skeleton3D").GetChildren(false)) {
+		foreach (Node limbNode in GetNode("Armature/GeneralSkeleton").GetChildren(false)) {
 			if (limbNode is Limb limb) {
-				GD.Print("connecting signal");
+				//GD.Print("connecting signal");
 				limb.Connect(Limb.SignalName.LimbHit, Callable.From<Limb, Vector3>(OnLimbHit));
 			}
 		}
@@ -30,9 +30,20 @@ public partial class Body : Node3D {
 
 		Array<StringName> array = new Array<StringName>() { new StringName(rig.GetBoneName(limb.GetBoneId())) };
 
+		//rig.PhysicalBonesStartSimulation(array);
+
+		limb.JointType = PhysicalBone3D.JointTypeEnum.None;
+
+		//GetTree().Root.AddChild(limb);
+
 		rig.PhysicalBonesStartSimulation(array);
 
-		limb.ApplyCentralImpulse(direction);
+		limb.ApplyCentralImpulse(direction * 5f);
+
+		
+		
+
+		limb.Disconnect(Limb.SignalName.LimbHit, Callable.From<Limb, Vector3>(OnLimbHit));
 
 		//rig.PhysicalBonesStopSimulation();
 	}

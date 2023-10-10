@@ -88,13 +88,13 @@ public partial class PlayerMovement : RigidBody3D {
 		Vector3 currentVelocity = state.LinearVelocity;
 
 		if (moveInput.Length() < 0.2f) {
-			float x = state.LinearVelocity.X;
+			/*float x = state.LinearVelocity.X;
 			float y = state.LinearVelocity.Z;
 
 			x = Mathf.Lerp(x, 0, stopSpeed);
 			y = Mathf.Lerp(y, 0, stopSpeed);
 
-			state.LinearVelocity = new Vector3(x, state.LinearVelocity.Y, y);
+			state.LinearVelocity = new Vector3(x, state.LinearVelocity.Y, y);*/
 		}
 
 		if (drag) {

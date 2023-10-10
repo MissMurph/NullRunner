@@ -18,7 +18,7 @@ public partial class Limb : PhysicalBone3D {
 	}
 
 	public void AttackLimb (Vector3 direction) {
-		GD.Print("calling signal");
+		//GD.Print("calling signal");
 		EmitSignal(SignalName.LimbHit, this, direction);
 	}
 }

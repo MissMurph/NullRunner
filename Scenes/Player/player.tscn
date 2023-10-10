@@ -23,6 +23,7 @@ script = ExtResource("1_6c2iq")
 speed = 15.0
 maxSpeed = 30.0
 stopSpeed = 0.2
+drag = false
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
