@@ -10,10 +10,15 @@ albedo_color = Color(0.333333, 0.333333, 0.333333, 1)
 
 [node name="GrappleHook" type="Node3D"]
 script = ExtResource("1_m7rvc")
+speed = 60.0
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_0xa1b")
 surface_material_override/0 = SubResource("StandardMaterial3D_4xio4")
 
 [node name="Ray" type="RayCast3D" parent="."]
-target_position = Vector3(0, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+exclude_parent = false
+target_position = Vector3(0, 0, -2)
+collision_mask = 4
+hit_from_inside = true

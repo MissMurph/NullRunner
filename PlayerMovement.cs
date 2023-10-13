@@ -48,6 +48,13 @@ public partial class PlayerMovement : RigidBody3D {
 
 	private bool grounded;
 
+	private Node3D grappleNode;
+
+	private bool grappling;
+
+	[Export]
+	private float grappleAcceleration = 6f;
+
 	public override void _Ready() {
 		head = GetNode<Node3D>("Head");
 		feet = GetNode<RayCast3D>("Feet");
@@ -82,6 +89,15 @@ public partial class PlayerMovement : RigidBody3D {
 		velocity = velocity.Lerp(direction * speed, acceleration * currentMovementModifier * (float)delta);
 
 		ApplyCentralForce(velocity);
+
+		if (grappling) {
+			Vector3 grappleDirection = grappleNode.GlobalPosition - GlobalPosition;
+			float distanceToAnchor = grappleDirection.Length();
+
+			//grappleProgress = distanceToAnchor / initialDistance;
+
+			ApplyCentralForce(grappleDirection.Normalized() * grappleAcceleration * (float)delta);
+		}
 	}
 
 	public override void _IntegrateForces (PhysicsDirectBodyState3D state) {
@@ -107,5 +123,15 @@ public partial class PlayerMovement : RigidBody3D {
 		if (@event.IsActionPressed("jump") && grounded) {
 			ApplyCentralImpulse(new Vector3(0, jumpForce, 0));
 		}
+	}
+
+	public void OnGrappleHit (Node3D grapplePoint) {
+		grappleNode = grapplePoint;
+		grappling = true;
+	}
+
+	public void OnGrappleRelease () {
+		grappling = false;
+		grappleNode = null;
 	}
 }

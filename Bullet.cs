@@ -26,6 +26,8 @@ public partial class Bullet : Node3D {
 			if (collider.GetCollider() is Limb bodyPart) {
 				bodyPart.AttackLimb(GlobalRotation);
 			}
+
+			QueueFree();
 		}
 	}
 }

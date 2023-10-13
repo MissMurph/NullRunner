@@ -9,7 +9,7 @@ public partial class GrappleHook : Node3D {
 	private RayCast3D collider;
 
 	[Signal]
-	public delegate void GrappleHitEventHandler ();
+	public delegate void GrappleHitEventHandler (Node3D grapplePoint);
 
 	public override void _Ready () {
 		collider = GetNode("Ray") as RayCast3D;
@@ -23,8 +23,9 @@ public partial class GrappleHook : Node3D {
 			) {
 			//bodyPart.Connect
 
+			GD.Print("Hit!");
 			speed = 0f;
-			EmitSignal(SignalName.GrappleHit);
+			EmitSignal(SignalName.GrappleHit, this);
 		}
 
 		

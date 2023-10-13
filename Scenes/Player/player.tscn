@@ -24,6 +24,7 @@ speed = 15.0
 maxSpeed = 30.0
 stopSpeed = 0.2
 drag = false
+grappleAcceleration = 2500.0
 
 [node name="MovementCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -57,3 +58,6 @@ surface_material_override/0 = SubResource("ShaderMaterial_futqo")
 [node name="Feet" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 target_position = Vector3(0, -0.3, 0)
+
+[connection signal="GrappleHit" from="Head/ViewPort/PlayerArms" to="." method="OnGrappleHit"]
+[connection signal="GrappleRelease" from="Head/ViewPort/PlayerArms" to="." method="OnGrappleRelease"]

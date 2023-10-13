@@ -29,18 +29,18 @@ public partial class ArmController : Node3D {
 	private PackedScene grappleResource;
 
 	[Signal]
-	public delegate void GrappleHitEventHandler ();
+	public delegate void GrappleHitEventHandler (Node3D grapplePoint);
 
 	[Signal]
 	public delegate void GrappleReleaseEventHandler ();
+
+	private Node3D hook;
 
 	public override void _Ready () {
 		animator = GetNode<AnimationPlayer>("AnimationPlayer");
 		animTree = GetNode<AnimationTree>("AnimationTree");
 
 		if (activeWeapon is not null) {
-			GD.Print("yeet");
-
 			leftHandTarget.GlobalPosition = activeWeapon.forwardGrip.GlobalPosition;
 			rightHandTarget.GlobalPosition = activeWeapon.backwardGrip.GlobalPosition;
 			leftIK.Start();
@@ -56,17 +56,20 @@ public partial class ArmController : Node3D {
 	public override void _Input (InputEvent @event) {
 		if (@event.IsAction("grapple")) {
 			if (@event.IsPressed()) {
-				GD.Print("Grapple Pressed");
 				leftIK.Stop();
 				animTree.Set("parameters/conditions/grappleEnd", false);
 				animTree.Set("parameters/conditions/fireGrapple", true);
 			}
 
 			if (@event.IsReleased()) {
-				GD.Print("Grapple Released");
 				animTree.Set("parameters/conditions/grappleEnd", true);
 				animTree.Set("parameters/conditions/fireGrapple", false);
 				leftIK.Start();
+
+				if (hook is not null) {
+					hook.QueueFree();
+					EmitSignal(SignalName.GrappleRelease);
+				}
 			}
 		}
 	}
@@ -78,12 +81,13 @@ public partial class ArmController : Node3D {
 		hookProjectile.Basis = GlobalTransform.Basis;
 		//GrappleHook yeet = hookProjectile.GetScript<GrappleHook>();
 
-		hookProjectile.Connect("GrappleHit", Callable.From(OnGrappleHit));
+		hookProjectile.Connect("GrappleHit", Callable.From<Node3D>(OnGrappleHit));
 
 		GetTree().Root.AddChild(hookProjectile);
 	}
 
-	private void OnGrappleHit () {
-		GD.Print("Grapple Hit Something");
+	private void OnGrappleHit (Node3D point) {
+		hook = point;
+		EmitSignal(SignalName.GrappleHit, point);
 	}
 }

@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://dm7alvryga7pe"]
+[gd_scene load_steps=17 format=3 uid="uid://dm7alvryga7pe"]
 
 [ext_resource type="PackedScene" uid="uid://c2h5u6vk5xk5k" path="res://Models/Player/PlayerArms.blend" id="1_us20b"]
 [ext_resource type="Script" path="res://Scenes/Player/ArmController.cs" id="2_ggjrm"]
+[ext_resource type="PackedScene" uid="uid://2gyi3ao4vpym" path="res://Scenes/Player/grapple_hook.tscn" id="3_2kkr5"]
 [ext_resource type="Animation" uid="uid://dg7xuqx6k6gs2" path="res://Animations/Player/ArmsDown.res" id="3_swqyp"]
 [ext_resource type="Animation" uid="uid://b5hwdhsx5xiok" path="res://Animations/Player/FireGrapple.res" id="4_lbo7c"]
 [ext_resource type="Animation" uid="uid://c28l7fki8asw7" path="res://Animations/Player/PullGrapple.res" id="5_cb4pf"]
@@ -59,6 +60,7 @@ rightHandTarget = NodePath("RightHandTarget")
 leftIK = NodePath("Armature/Skeleton3D/LeftArmIK")
 rightIK = NodePath("Armature/Skeleton3D/RightArmIK")
 grappleSource = NodePath("Armature/Skeleton3D/GrappleAttachment")
+grappleResource = ExtResource("3_2kkr5")
 
 [node name="Armature" parent="." index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -91,7 +93,7 @@ magnet = Vector3(2, -1, 0)
 target_node = NodePath("../../../RightHandTarget")
 
 [node name="GrappleAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(-1, -2.04891e-08, -6.25849e-07, 1.49012e-07, -0.94777, -0.318955, -5.36442e-07, -0.318955, 0.94777, -1.45102, -1.59182, 0.0438469)
+transform = Transform3D(-1, -1.39698e-07, 5.96046e-08, 1.04308e-07, -0.94777, -0.318956, 1.19209e-07, -0.318956, 0.94777, -1.45102, -1.59182, 0.0438444)
 bone_name = "Hand L"
 bone_idx = 12
 
