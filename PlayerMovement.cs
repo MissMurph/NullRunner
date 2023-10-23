@@ -55,6 +55,7 @@ public partial class PlayerMovement : RigidBody3D {
 	[Export]
 	private float grappleAcceleration = 6f;
 
+
 	public override void _Ready() {
 		head = GetNode<Node3D>("Head");
 		feet = GetNode<RayCast3D>("Feet");
@@ -117,6 +118,18 @@ public partial class PlayerMovement : RigidBody3D {
 			float magnitude = currentVelocity.LengthSquared() * currentDrag;
 			state.LinearVelocity -= currentVelocity.Normalized() * magnitude * state.Step;
 		}
+
+		/*if (Input.IsActionJustPressed("test_command")) {
+			var spaceState = GetWorld3D().DirectSpaceState;
+			Vector3 direction = (head.GlobalTransform.Basis.X * head.GlobalTransform.Basis.Z * head.GetNode<Node3D>("ViewPort").GlobalTransform.Basis.Y).Normalized();
+
+			PhysicsRayQueryParameters3D query = PhysicsRayQueryParameters3D.Create(head.GlobalPosition, direction * 100f);
+			var result = spaceState.IntersectRay(query);
+
+			if (result.Count > 0) {
+				EmitSignal(SignalName.TestCommand, result["position"]);
+			}
+		}*/
 	}
 
 	public override void _Input (InputEvent @event) {

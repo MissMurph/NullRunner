@@ -93,7 +93,7 @@ magnet = Vector3(2, -1, 0)
 target_node = NodePath("../../../RightHandTarget")
 
 [node name="GrappleAttachment" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="8"]
-transform = Transform3D(-1, -1.39698e-07, 5.96046e-08, 1.04308e-07, -0.94777, -0.318956, 1.19209e-07, -0.318956, 0.94777, -1.45102, -1.59182, 0.0438444)
+transform = Transform3D(-1, -2.04891e-08, -6.25849e-07, 1.49012e-07, -0.94777, -0.318955, -5.36442e-07, -0.318955, 0.94777, -1.45102, -1.59182, 0.0438469)
 bone_name = "Hand L"
 bone_idx = 12
 

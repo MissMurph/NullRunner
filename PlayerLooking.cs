@@ -15,6 +15,8 @@ public partial class PlayerLooking : Node3D {
 
 	private Camera3D viewPort;
 
+	
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
 		Input.MouseMode = Input.MouseModeEnum.Captured;
