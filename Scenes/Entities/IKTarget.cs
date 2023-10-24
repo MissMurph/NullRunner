@@ -21,8 +21,14 @@ public partial class IKTarget : Marker3D {
 	}
 
 	public override void _Process (double delta) {
-		if (!isStepping && !adjacentLeg.isStepping && Math.Abs(GlobalPosition.DistanceTo(stepTarget.GlobalPosition)) > stepDistance) {
+		float distanceToNextStep = Math.Abs(GlobalPosition.DistanceTo(stepTarget.GlobalPosition));
+
+		if (!isStepping && !adjacentLeg.isStepping && distanceToNextStep > stepDistance) {
+			//GD.Print("Step!");
 			Step();
+		}
+		else {
+			//GD.Print("Couldn't Step, position: " + GlobalPosition + " Step Target: " + stepTarget.GlobalPosition);
 		}
 	}
 
@@ -33,8 +39,8 @@ public partial class IKTarget : Marker3D {
 		isStepping = true;
 
 		Tween tween = GetTree().CreateTween();
-		tween.TweenProperty(this, "global_position", halfWay + parent.Basis.Y, 0.1);
-		tween.TweenProperty(this, "global_position", targetPos, 0.1);
+		tween.TweenProperty(this, "global_position", halfWay + parent.Basis.Y, 0.2);
+		tween.TweenProperty(this, "global_position", targetPos, 0.2);
 		tween.TweenCallback(Callable.From(() => isStepping = false));
 	}
 }

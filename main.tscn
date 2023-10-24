@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://jnoagalq5yiw" path="res://Textures/Checker.png" id="2_f4jiy"]
 [ext_resource type="Material" uid="uid://dj3s8bcvk3rts" path="res://Materials/Triplanar.tres" id="4_odf2d"]
 [ext_resource type="PackedScene" uid="uid://bn7c7eavsq38" path="res://Scenes/Entities/body.tscn" id="5_1fw2g"]
-[ext_resource type="PackedScene" uid="uid://cwmbyd2dbafaq" path="res://Scenes/Entities/spider_bot.tscn" id="6_l8ng5"]
+[ext_resource type="PackedScene" uid="uid://dcghlj8f8hxr8" path="res://Scenes/Entities/spider_bot.tscn" id="6_l8ng5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_4mwxq"]
 friction = 0.1
@@ -34,7 +34,7 @@ size = Vector3(120, 50, 1)
 script = ExtResource("1_cpo7n")
 
 [node name="Player" parent="." instance=ExtResource("1_utdh0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.101836, -3.00677)
 collision_layer = 3
 speed = 25.0
 maxSpeed = 20.0
@@ -103,7 +103,4 @@ shape = SubResource("BoxShape3D_ielh8")
 transform = Transform3D(4.37114e-08, 8.74228e-08, 1, 3.82137e-15, -1, 8.74228e-08, 1, 0, -4.37114e-08, 60, 26, 2.62268e-06)
 shape = SubResource("BoxShape3D_ielh8")
 
-[node name="Spider_Bot" parent="." node_paths=PackedStringArray("target") instance=ExtResource("6_l8ng5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.432116, 7.36154)
-turnSpeed = 15.0
-target = NodePath("../Player")
+[node name="Spider_Bot" parent="." instance=ExtResource("6_l8ng5")]

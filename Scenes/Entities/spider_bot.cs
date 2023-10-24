@@ -17,28 +17,28 @@ public partial class spider_bot : CharacterBody3D {
 		//Vector3 direction
 	}
 
-	private NavigationAgent3D navAgent;
+	//private NavigationAgent3D navAgent;
 
 	//private Vector3 _movementTargetPosition = new Vector3(-3.0f, 0.0f, 2.0f);
 
 	private Vector3 movementTarget;
 
-	public Vector3 MovementTarget {
+	/*public Vector3 MovementTarget {
 		get { return navAgent.TargetPosition; }
 		set { navAgent.TargetPosition = value; }
-	}
+	}*/
 
 	public override void _Ready () {
 		base._Ready();
 
 		currentDirection = new Vector3();
 
-		navAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
+		//navAgent = GetNode<NavigationAgent3D>("NavigationAgent3D");
 
 		// These values need to be adjusted for the actor's speed
 		// and the navigation layout.
-		navAgent.PathDesiredDistance = 0.5f;
-		navAgent.TargetDesiredDistance = 0.5f;
+		//navAgent.PathDesiredDistance = 0.5f;
+		//navAgent.TargetDesiredDistance = 0.5f;
 
 		// Make sure to not await during _Ready.
 		//Callable.From(ActorSetup).CallDeferred();

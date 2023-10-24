@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5paxphqr2arr"]
+
+[ext_resource type="Material" uid="uid://dj3s8bcvk3rts" path="res://Materials/Triplanar.tres" id="1_tlkvp"]
+[ext_resource type="PackedScene" uid="uid://dcghlj8f8hxr8" path="res://Scenes/Entities/spider_bot.tscn" id="2_nx6bx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_umlsq"]
+flip_faces = true
+size = Vector3(20, 20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_awfvr"]
+size = Vector3(22.4613, 2, 26.382)
+
+[node name="spider_test_scene" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="MeshInstance3D" type="CSGMesh3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_umlsq")
+material = ExtResource("1_tlkvp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="StaticBody3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+shape = SubResource("BoxShape3D_awfvr")
+
+[node name="Spider_Bot" parent="." instance=ExtResource("2_nx6bx")]
+move_speed = 1.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.298836, 0.640856, 0, 0.906308, 0.422618, -0.707107, -0.298836, 0.640856, 2.23251, 1.667, 2.16749)
+current = true
