@@ -18,8 +18,18 @@ public partial class Weapon : Node3D {
 	[Export]
 	private PackedScene bulletResource;
 
+	private Sprite3D muzzleFlash;
+
+	private RandomNumberGenerator rando;
+
+	[Export]
+	public bool firingComplete;
+
 	public override void _Ready() {
-		
+		muzzleFlash = GetNode<Sprite3D>("GunRig/Muzzle/MuzzleFlash");
+		muzzleFlash.Visible = false;
+		firingComplete = false;
+		rando = new RandomNumberGenerator();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,11 +40,20 @@ public partial class Weapon : Node3D {
 				Node3D bullet = bulletResource.Instantiate() as Node3D;
 				bullet.Position = muzzle.GlobalPosition;
 				bullet.Basis = muzzle.GlobalTransform.Basis;
-				//GD.Print(bullet);
-				//Owner.AddChild(bullet);
-				//RemoveChild(bullet);
+
+				float angle = rando.RandfRange(0, 360);
+				float size = rando.RandfRange(0.7f, 1.2f);
+
+				muzzleFlash.RotationDegrees = new Vector3(0, 0, angle);
+				muzzleFlash.Scale = Vector3.One * size;
+
+				muzzleFlash.Visible = true;
+				
 				GetTree().Root.AddChild(bullet);
+				firingComplete = false;
 			}
 		}
+
+		if (firingComplete) muzzleFlash.Visible = false;
 	}
 }

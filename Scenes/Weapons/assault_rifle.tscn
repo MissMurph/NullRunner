@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhq6mcj16c3ea"]
+[gd_scene load_steps=9 format=3 uid="uid://bhq6mcj16c3ea"]
 
 [ext_resource type="PackedScene" uid="uid://dhh57m5bh0lk0" path="res://Models/Guns/AssaultRifle/AssaultRifle.blend" id="1_8y46q"]
 [ext_resource type="Script" path="res://Weapon.cs" id="2_8yprt"]
 [ext_resource type="PackedScene" uid="uid://dvw8430xyiuqi" path="res://bullet.tscn" id="3_vc6tv"]
+[ext_resource type="Texture2D" uid="uid://b4cgbk14rkhmx" path="res://Textures/muzzle_flash.png" id="4_aspvt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i6jvv"]
 albedo_color = Color(0.431373, 0.431373, 0.431373, 1)
@@ -29,6 +30,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0.1), Vector3(0, 0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:firingComplete")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.01),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_87os2"]
 _data = {
@@ -40,11 +53,21 @@ script = ExtResource("2_8yprt")
 forwardGrip = NodePath("GunRig/Skeleton3D/Gun/ForwardGrip")
 backwardGrip = NodePath("GunRig/Skeleton3D/Gun/BackGrip")
 animator = NodePath("AnimationPlayer")
-muzzle = NodePath("Muzzle")
+muzzle = NodePath("GunRig/Muzzle")
 bulletResource = ExtResource("3_vc6tv")
+firingComplete = true
 
 [node name="GunRig" parent="." index="0"]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+
+[node name="Muzzle" type="RayCast3D" parent="GunRig" index="0"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, -2.01037)
+target_position = Vector3(0, 0, -1)
+
+[node name="MuzzleFlash" type="Sprite3D" parent="GunRig/Muzzle" index="0"]
+pixel_size = 0.025
+texture_filter = 0
+texture = ExtResource("4_aspvt")
 
 [node name="Gun" parent="GunRig/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("StandardMaterial3D_i6jvv")
@@ -62,7 +85,3 @@ surface_material_override/0 = SubResource("StandardMaterial3D_1ax31")
 libraries = {
 "": SubResource("AnimationLibrary_87os2")
 }
-
-[node name="Muzzle" type="RayCast3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.402074)
-target_position = Vector3(0, 0, -1)

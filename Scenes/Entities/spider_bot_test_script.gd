@@ -26,11 +26,11 @@ func _process(delta):
 	_handle_movement(delta)
 	
 func _handle_movement(delta):
-	var dir = Input.get_axis('move_backward', 'move_forward')
+	"""var dir = Input.get_axis('move_backward', 'move_forward')
 	translate(Vector3(0, 0, -dir) * move_speed * delta)
 	
 	var a_dir = Input.get_axis('move_right', 'move_left')
-	rotate_object_local(Vector3.UP, a_dir * turn_speed * delta)
+	rotate_object_local(Vector3.UP, a_dir * turn_speed * delta)"""
 
 func _basis_from_normal(normal: Vector3) -> Basis:
 	var result = Basis()
